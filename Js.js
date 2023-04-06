@@ -1,5 +1,6 @@
 
 // var currentQuestion0
+
 var timerEl = document.getElementById("counter")
 var button = document.querySelector(".beginBtn")
 var quizQuestions = [{
@@ -33,13 +34,15 @@ var quizQuestions = [{
 
 }];
 
+
+
 // function recallHighscores/init()
 console.log(quizQuestions[0].questionString)
 console.log(quizQuestions[0].choices.correct)
 
 function countdown() {
 
-    var timeLeft = 90;
+    var timeLeft = 120;
 
     var timeInterval = setInterval(function () {
 
@@ -74,7 +77,10 @@ function changeDisplay() {
 
 
 function beginQuiz() {
-    countdown()
+   
+   timerEl.style.display = "block" 
+    
+   countdown()
 
     changeDisplay()
 var quizBtn1 = document.querySelector('.btn1')
@@ -120,9 +126,13 @@ quizBtn4.textContent = quizQuestions[3].choices.wrong[2];
 
 quizBtn2.addEventListener('click', function (){
 
-questionSelector.textContent = "Score:" ;
+questionSelector.textContent = "Score:"  ;
 
-quizBtn1.style.display = "none"
+
+quizBtn1.style.display = "none";
+quizBtn2.style.display = "none";
+quizBtn3.style.display = "none";
+quizBtn4.style.display = "none";
 
 
 } )
@@ -133,9 +143,6 @@ quizBtn1.style.display = "none"
 })
 })
 }
-
-
-
 
 // Event Listeners
 

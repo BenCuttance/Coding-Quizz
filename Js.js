@@ -8,7 +8,7 @@ var questionSelector = document.querySelector('#question');
 var highBtn = document.querySelector('#highBtn')
 var submitBtn = document.querySelector('#subnitBtn')
 var collectName = document.getElementById('fname')
-
+var timeInterval = setInterval(timerEl, 1000)
 
 
 var timerEl = document.getElementById("counter")
@@ -45,7 +45,13 @@ var quizQuestions = [{
 
 }];
 
-var timeLeft = 10;
+var timeLeft = 60;
+
+
+function stopTimer (){
+    clearInterval(timeInterval);
+}
+
 
 // function recallHighscores/init()
 console.log(quizQuestions[0].questionString)
@@ -53,7 +59,7 @@ console.log(quizQuestions[0].choices.correct)
 
 function countdown() {
 
-    var timeInterval = setInterval(function () {
+    const timeInterval = setInterval(function () {
 
         if (timeLeft > 1) {
 
@@ -81,7 +87,11 @@ function countdown() {
 
         }
     }, 1000);
+
+
 }
+
+
 
 function changeDisplay() {
 
@@ -112,6 +122,8 @@ quizBtn1.textContent= quizQuestions[0].choices.wrong[0];
 quizBtn2.textContent = quizQuestions[0].choices.wrong[1];
 quizBtn3.textContent = quizQuestions[0].choices.correct;
 quizBtn4.textContent = quizQuestions[0].choices.wrong[2];
+
+
 
 quizBtn3.addEventListener('click', function () {
 
@@ -160,8 +172,12 @@ quizBtn2.addEventListener('click', function (){
 
 button.addEventListener("click", beginQuiz);
 
+
 function scoreForm () {
-    clearInterval(timerEl);
+
+    stopTimer()
+   
+    timerEl.textContent = "Seconds remaining:" + timeLeft;
     questionSelector.textContent = "Game Over: Score: " + timeLeft  ;
     leaderBoard.style.display = "block"
     
@@ -179,3 +195,22 @@ function scoreForm () {
 
 
 }
+
+
+// quizBtn1.addEventListener('click', function () {
+
+//     timeLeft -= 5;
+    
+//     })
+    
+//     quizBtn2.addEventListener('click', function () {
+    
+//         timeLeft -= 5;
+        
+//         })
+    
+//     quizBtn4.addEventListener('click', function () {
+    
+//             timeLeft -= 5;
+            
+//             })

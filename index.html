@@ -20,8 +20,12 @@
         <button class="beginBtn">Begin quiz</button>
     </div>
 
+    <div class="highScores">
+        <button id="highBtn"> Leaderboard </button>
+    </div>
+
     <div class="counterDiv">
-        <span id="counter">Seconds remaining: 120</span>
+        <span id="counter">Seconds remaining: 60</span>
     </div>
 
     <div class="container">
@@ -37,6 +41,14 @@
                     <button class="btn3">Answer 3</button>
                   <br>
                     <button class="btn4">Answer 4</button>
+                    <form action="/action_page.php" class="leaderBoard">
+                        <label for="Title">Leaderboard:</label>
+                        <br>
+                        <label for="fname">First name:</label><br>
+                        <input type="text" id="fname" name="fname" value=""><br>
+                        <br>
+                        <input id="submitBtn" type="submit" value="Submit">
+                      </form> 
                     
         <div class="controls">
             <!-- <button class="beginBtn">Begin quiz</button> -->

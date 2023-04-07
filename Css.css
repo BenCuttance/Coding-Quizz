@@ -124,3 +124,53 @@ button:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
+
+.leaderBoard {
+
+    display: none;
+    margin-left: 308px;
+    margin-bottom: 10px;
+    
+
+}
+
+
+#highBtn {
+
+position: absolute;
+top: 360px;
+right: 854px;
+
+
+padding: 15px;
+font-size: 30px;
+border-radius: 35px;
+box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.548);
+transition: all 0.3s ease 0s;
+cursor: pointer;
+}
+
+#highBtn:hover {
+
+    transform: translateY(-3px);
+}
+
+input {
+
+
+border-radius: 35px;
+font-size: 20px;
+}
+
+#submitBtn {
+
+    border-radius: 35px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+label {
+
+font-size: 20px;
+
+}

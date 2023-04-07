@@ -1,8 +1,19 @@
 
 // var currentQuestion0
+var quizBtn1 = document.querySelector('.btn1')
+var quizBtn2 = document.querySelector('.btn2')
+var quizBtn3 = document.querySelector('.btn3')
+var quizBtn4 = document.querySelector('.btn4')
+var questionSelector = document.querySelector('#question');
+var highBtn = document.querySelector('#highBtn')
+var submitBtn = document.querySelector('#subnitBtn')
+var collectName = document.getElementById('fname')
+
+
 
 var timerEl = document.getElementById("counter")
 var button = document.querySelector(".beginBtn")
+var leaderBoard = document.querySelector(".leaderBoard")
 var quizQuestions = [{
     questionString: "String values must be enclosed within ______ when being assinged to variables",
 
@@ -34,15 +45,13 @@ var quizQuestions = [{
 
 }];
 
-
+var timeLeft = 10;
 
 // function recallHighscores/init()
 console.log(quizQuestions[0].questionString)
 console.log(quizQuestions[0].choices.correct)
 
 function countdown() {
-
-    var timeLeft = 120;
 
     var timeInterval = setInterval(function () {
 
@@ -58,7 +67,18 @@ function countdown() {
             timeLeft--;
         } else {
 
-            timerEl.textContent = 'Seconds remaining: 0';
+            timerEl.textContent = "Seconds remaining: 0"
+            scoreForm ()
+            // timerEl.textContent = 'Seconds remaining: 0';
+            // questionSelector.textContent = "Game Over!    Score: " + timeLeft;
+            // quizBtn1.style.display = "none";
+            // quizBtn2.style.display = "none";
+            // quizBtn3.style.display = "none";
+            // quizBtn4.style.display = "none";
+            // leaderBoard.style.display = "block"
+
+
+
         }
     }, 1000);
 }
@@ -72,6 +92,7 @@ function changeDisplay() {
     questionContainer.style.display = "block";
 
     beginBtn.style.display = "none";
+    highBtn.style.display = "none";
 
 }
 
@@ -83,11 +104,7 @@ function beginQuiz() {
    countdown()
 
     changeDisplay()
-var quizBtn1 = document.querySelector('.btn1')
-var quizBtn2 = document.querySelector('.btn2')
-var quizBtn3 = document.querySelector('.btn3')
-var quizBtn4 = document.querySelector('.btn4')
-var questionSelector = document.querySelector('#question');
+
 
 questionSelector.textContent = quizQuestions[0].questionString;
 
@@ -126,13 +143,8 @@ quizBtn4.textContent = quizQuestions[3].choices.wrong[2];
 
 quizBtn2.addEventListener('click', function (){
 
-questionSelector.textContent = "Score:"  ;
+    scoreForm() 
 
-
-quizBtn1.style.display = "none";
-quizBtn2.style.display = "none";
-quizBtn3.style.display = "none";
-quizBtn4.style.display = "none";
 
 
 } )
@@ -148,3 +160,22 @@ quizBtn4.style.display = "none";
 
 button.addEventListener("click", beginQuiz);
 
+function scoreForm () {
+    clearInterval(timerEl);
+    questionSelector.textContent = "Game Over: Score: " + timeLeft  ;
+    leaderBoard.style.display = "block"
+    
+
+    quizBtn1.style.display = "none";
+    quizBtn2.style.display = "none";
+    quizBtn3.style.display = "none";
+    quizBtn4.style.display = "none";
+    
+// submitBtn.addEventListener('click', function(){
+
+// localStorage.setItem("fname", collectName.value)
+
+// })
+
+
+}

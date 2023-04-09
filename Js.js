@@ -9,6 +9,7 @@ var highBtn = document.querySelector('#highBtn')
 var submitBtn = document.querySelector('#subnitBtn')
 var collectName = document.getElementById('fname')
 var timeInterval = setInterval(timerEl, 1000)
+var retryBtn = document.querySelector('#retryBtn')
 
 
 var timerEl = document.getElementById("counter")
@@ -181,7 +182,7 @@ function scoreForm () {
     questionSelector.textContent = "Game Over: Score: " + timeLeft  ;
     leaderBoard.style.display = "block"
     
-
+    retryBtn.style.display = "block"
     quizBtn1.style.display = "none";
     quizBtn2.style.display = "none";
     quizBtn3.style.display = "none";
@@ -214,3 +215,5 @@ function scoreForm () {
 //             timeLeft -= 5;
             
 //             })
+
+// retryBtn.addEventListener('click', beginQuiz )

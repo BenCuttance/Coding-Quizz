@@ -55,12 +55,15 @@ function stopTimer (){
 
 
 // function recallHighscores/init()
-console.log(quizQuestions[0].questionString)
-console.log(quizQuestions[0].choices.correct)
 
+
+
+
+
+
+var timeInterval = null;
 function countdown() {
-
-    const timeInterval = setInterval(function () {
+     timeInterval = setInterval(function () {
 
         if (timeLeft > 1) {
 
@@ -104,6 +107,7 @@ function changeDisplay() {
 
     beginBtn.style.display = "none";
     highBtn.style.display = "none";
+    retryBtn.style.display = "none";
 
 }
 
@@ -111,6 +115,8 @@ function changeDisplay() {
 function beginQuiz() {
    
    timerEl.style.display = "block" 
+
+   leaderBoard.style.display = "none"
     
    countdown()
 
@@ -141,9 +147,10 @@ questionSelector.textContent = quizQuestions[2].questionString;
 
 
 quizBtn1.textContent= quizQuestions[2].choices.correct;
-quizBtn2.textContent = quizQuestions[2].choices.wrong[2];
-quizBtn3.textContent = quizQuestions[2].choices.wrong[1];
+quizBtn2.textContent = quizQuestions[2].choices.wrong[1];
+quizBtn3.textContent = quizQuestions[2].choices.wrong[2];
 quizBtn4.textContent = quizQuestions[2].choices.wrong[0];
+
 
 quizBtn1.addEventListener('click', function (){
 
@@ -172,7 +179,7 @@ quizBtn2.addEventListener('click', function (){
 // Event Listeners
 
 button.addEventListener("click", beginQuiz);
-
+clearInterval(timeInterval);
 
 function scoreForm () {
 
@@ -216,4 +223,31 @@ function scoreForm () {
             
 //             })
 
-// retryBtn.addEventListener('click', beginQuiz )
+function retryQuiz () {
+
+    quizBtn1.style.display = "block";
+    quizBtn2.style.display = "block";
+    quizBtn3.style.display = "block";
+    quizBtn4.style.display = "block";
+
+    timeLeft = 60;
+
+beginQuiz ()
+
+
+}
+
+retryBtn.addEventListener('click', retryQuiz )
+
+// function setThree () {
+
+// questionSelector.textContent = quizQuestions[2].questionString;
+
+
+// quizBtn1.textContent= quizQuestions[2].choices.correct;
+// quizBtn2.textContent = quizQuestions[2].choices.wrong[1];
+// quizBtn3.textContent = quizQuestions[2].choices.wrong[2];
+// quizBtn4.textContent = quizQuestions[2].choices.wrong[0];
+
+
+// }

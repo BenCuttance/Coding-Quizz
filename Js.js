@@ -97,6 +97,7 @@ function countdown() {
 
 }
 
+
 var currentIndex = 0
 
 function changeDisplay() {
@@ -123,8 +124,17 @@ if ( correctAnswer == selectedAnswer) {
     alert("wrong")
 }
 currentIndex++;
+
+
+if (currentIndex >= quizQuestions.length) {
+
+    scoreForm() 
+
+} else {
+
 displayQuestion ()
 
+}
 
 }
 
@@ -245,7 +255,11 @@ function retryQuiz() {
     quizBtn4.style.display = "block";
 
     timeLeft = 60;
+leaderBoard.style.display = "none"
+retryBtn.style.display = "none"
+    
 
+    checkAnswer()
     beginQuiz()
 
 

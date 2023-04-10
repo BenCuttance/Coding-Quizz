@@ -6,7 +6,7 @@ var quizBtn3 = document.querySelector('.btn3')
 var quizBtn4 = document.querySelector('.btn4')
 var questionSelector = document.querySelector('#question');
 var highBtn = document.querySelector('#highBtn')
-var submitBtn = document.querySelector('#subnitBtn')
+var submitBtn = document.querySelector('#submitBtn')
 var collectName = document.getElementById('fname')
 var timeInterval = setInterval(timerEl, 1000)
 var retryBtn = document.querySelector('#retryBtn')
@@ -47,7 +47,7 @@ var quizQuestions = [{
 // }, {
 
 //         questionString: "Game Over, Score:", 
-    
+
 
 
 }];
@@ -226,6 +226,8 @@ function scoreForm() {
 
     stopTimer()
 
+    
+
     timerEl.textContent = "Seconds remaining:" + timeLeft;
     questionSelector.textContent = "Game Over: Score: " + timeLeft;
     leaderBoard.style.display = "block"
@@ -236,11 +238,15 @@ function scoreForm() {
     quizBtn3.style.display = "none";
     quizBtn4.style.display = "none";
 
-    // submitBtn.addEventListener('click', function(){
+    
 
-    // localStorage.setItem("fname", collectName.value)
+    submitBtn.addEventListener('click', function(){
 
-    // })
+    localStorage.setItem("fname", collectName.value)
+
+    
+
+    })
 
 
 }
@@ -259,6 +265,8 @@ leaderBoard.style.display = "none"
 retryBtn.style.display = "none"
     
 
+    countdown()
+
     checkAnswer()
     beginQuiz()
 
@@ -267,4 +275,8 @@ retryBtn.style.display = "none"
 
 retryBtn.addEventListener('click', retryQuiz)
 
+localStorage.clear();
 
+
+localStorage.setItem("score", timeLeft);
+localStorage.getItem("score"); 

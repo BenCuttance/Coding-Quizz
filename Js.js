@@ -1,5 +1,5 @@
+// List of Variables used throughout the code
 
-// var currentQuestion0
 var quizBtn1 = document.querySelector('.btn1')
 var quizBtn2 = document.querySelector('.btn2')
 var quizBtn3 = document.querySelector('.btn3')
@@ -10,11 +10,19 @@ var submitBtn = document.querySelector('#submitBtn')
 var collectName = document.getElementById('fname')
 var timeInterval = setInterval(timerEl, 1000)
 var retryBtn = document.querySelector('#retryBtn')
+var questionContainer = document.querySelector(".container");
+var beginBtn = document.querySelector('.beginBtn')
+var highScores = document.querySelector('.highScores')
+
+var timeLeft = 60;
 
 
 var timerEl = document.getElementById("counter")
 var button = document.querySelector(".beginBtn")
 var leaderBoard = document.querySelector(".leaderBoard")
+
+// Object holding the quiz question, correct and wrong answers that will be used in the displayQuestion function 
+
 var quizQuestions = [{
     questionString: "String values must be enclosed within ______ when being assinged to variables",
 
@@ -44,24 +52,21 @@ var quizQuestions = [{
 
     }, 
 
-// }, {
-
-//         questionString: "Game Over, Score:", 
-
 
 
 }];
 
-var timeLeft = 60;
 
+// Function to stop timer, which will be called once the user reaches the end of the quiz
 
 function stopTimer() {
     clearInterval(timeInterval);
 }
 
+button.addEventListener("click", beginQuiz);
 
-// function recallHighscores/init()
 
+// Function to call timer once user begins quiz. If counter reaches 0 calls scoreForm function to end game. 
 
 var timeInterval = null;
 function countdown() {
@@ -81,15 +86,6 @@ function countdown() {
 
             timerEl.textContent = "Seconds remaining: 0"
             scoreForm()
-            // timerEl.textContent = 'Seconds remaining: 0';
-            // questionSelector.textContent = "Game Over!    Score: " + timeLeft;
-            // quizBtn1.style.display = "none";
-            // quizBtn2.style.display = "none";
-            // quizBtn3.style.display = "none";
-            // quizBtn4.style.display = "none";
-            // leaderBoard.style.display = "block"
-
-
 
         }
     }, 1000);
@@ -97,13 +93,14 @@ function countdown() {
 
 }
 
+// changes display of multiples buttons to be hidden from user once the quiz starts. Also makes the questionContainer appear which will hold the quix for the user to play with
 
 var currentIndex = 0
 
 function changeDisplay() {
 
-    var beginBtn = document.querySelector('.beginBtn')
-    var questionContainer = document.querySelector(".container");
+    
+   
     var answerGrid = document.querySelector('#answerButtons')
 
     questionContainer.style.display = "block";
@@ -152,6 +149,13 @@ function displayQuestion () {
 
 function beginQuiz() {
 
+    timeLeft = 60
+    currentIndex = 0
+    quizBtn1.style.display = "block";
+    quizBtn2.style.display = "block";
+    quizBtn3.style.display = "block";
+    quizBtn4.style.display = "block";
+
     timerEl.style.display = "block"
 
     leaderBoard.style.display = "none"
@@ -171,56 +175,12 @@ function beginQuiz() {
 
     displayQuestion()
 
-
-
-    // quizBtn3.addEventListener('click', function () {
-
-    //     questionSelector.textContent = quizQuestions[1].questionString;
-
-    //     quizBtn1.textContent = quizQuestions[1].choices.wrong[0];
-    //     quizBtn2.textContent = quizQuestions[1].choices.wrong[2];
-    //     quizBtn3.textContent = quizQuestions[1].choices.wrong[1];
-    //     quizBtn4.textContent = quizQuestions[1].choices.correct;
-
-    //     quizBtn4.addEventListener('click', function () {
-
-    //         questionSelector.textContent = quizQuestions[2].questionString;
-
-
-    //         quizBtn1.textContent = quizQuestions[2].choices.correct;
-    //         quizBtn2.textContent = quizQuestions[2].choices.wrong[1];
-    //         quizBtn3.textContent = quizQuestions[2].choices.wrong[2];
-    //         quizBtn4.textContent = quizQuestions[2].choices.wrong[0];
-
-
-    //         quizBtn1.addEventListener('click', function () {
-
-    //             questionSelector.textContent = quizQuestions[3].questionString;
-
-    //             quizBtn1.textContent = quizQuestions[3].choices.wrong[1];
-    //             quizBtn2.textContent = quizQuestions[3].choices.correct;
-    //             quizBtn3.textContent = quizQuestions[3].choices.wrong[0];
-    //             quizBtn4.textContent = quizQuestions[3].choices.wrong[2];
-
-    //             quizBtn2.addEventListener('click', function () {
-
-    //                 scoreForm()
-
-
-
-    //             })
-
-
-    //         })
-
-    //     })
-    // })
 }
 
-// Event Listeners
 
-button.addEventListener("click", beginQuiz);
 clearInterval(timeInterval);
+
+
 
 function scoreForm() {
 
@@ -232,7 +192,7 @@ function scoreForm() {
     questionSelector.textContent = "Game Over: Score: " + timeLeft;
     leaderBoard.style.display = "block"
 
-    retryBtn.style.display = "block"
+    
     quizBtn1.style.display = "none";
     quizBtn2.style.display = "none";
     quizBtn3.style.display = "none";
@@ -240,43 +200,47 @@ function scoreForm() {
 
     
 
-    submitBtn.addEventListener('click', function(){
+    submitBtn.addEventListener('click', endQuiz)
+}
 
-    localStorage.setItem("fname", collectName.value)
 
-    
+function endQuiz () {
 
-    })
 
+    localStorage.setItem("score", timeLeft);
+    localStorage.setItem ("fname", collectName.value);
+
+console.log(latestScore)
+console.log(collectName.value)
+
+    questionContainer.style.display = "none";
+
+    beginBtn.style.display = "block";
+    // highBtn.style.display = "block";
 
 }
 
 
+const latestScore = {
 
-function retryQuiz() {
+    score: timeLeft,
+    name: 'fname',
+    
+    };
 
-    quizBtn1.style.display = "block";
-    quizBtn2.style.display = "block";
-    quizBtn3.style.display = "block";
-    quizBtn4.style.display = "block";
-
-    timeLeft = 60;
-leaderBoard.style.display = "none"
-retryBtn.style.display = "none"
     
 
-    countdown()
-
-    checkAnswer()
-    beginQuiz()
 
 
-}
 
-retryBtn.addEventListener('click', retryQuiz)
-
-localStorage.clear();
+// highBtn.addEventListener('click', displayBoard)
 
 
-localStorage.setItem("score", timeLeft);
-localStorage.getItem("score"); 
+
+
+// function displayBoard () {
+
+//     highBtn.style.display = 'none'
+//     highScores = localStorage.fname 
+
+// }

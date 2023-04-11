@@ -13,6 +13,8 @@ var retryBtn = document.querySelector('#retryBtn')
 var questionContainer = document.querySelector(".container");
 var beginBtn = document.querySelector('.beginBtn')
 var highScores = document.querySelector('.highScores')
+var currentIndex = 0
+
 
 var timeLeft = 60;
 
@@ -93,9 +95,11 @@ function countdown() {
 
 }
 
-// changes display of multiples buttons to be hidden from user once the quiz starts. Also makes the questionContainer appear which will hold the quix for the user to play with
+// changes display of multiples buttons to be hidden from user once the quiz starts. Also makes the questionContainer appear which will hold the quiz for the user to 
+// interact with
 
-var currentIndex = 0
+
+
 
 function changeDisplay() {
 
@@ -110,6 +114,8 @@ function changeDisplay() {
     retryBtn.style.display = "none";
 
 }
+
+// 
 
 function checkAnswer(event){
 var correctAnswer = quizQuestions[currentIndex].choices.correct;
@@ -204,43 +210,42 @@ function scoreForm() {
 }
 
 
+var scoreBoard = [];
 function endQuiz () {
 
 
-    localStorage.setItem("score", timeLeft);
-    localStorage.setItem ("fname", collectName.value);
+scoreBoard.push({Name:collectName.value, score: timeLeft});
+    
+console.log(scoreBoard);
 
-console.log(latestScore)
-console.log(collectName.value)
+
+// localStorage.setItem("scoreBoard", JSON.stringify(scoreBoard));
+
+appendToStorage( "oldScores", JSON.stringify(scoreBoard));
 
     questionContainer.style.display = "none";
 
     beginBtn.style.display = "block";
-    // highBtn.style.display = "block";
 
+    //   Append that LI to the UL. Give the text content will contain scoreBoard name & Score. 
+   
 }
 
+// array1.forEach(element => console.log(element));
 
-const latestScore = {
+var ulScores = document.querySelector("#ulScores");
 
-    score: timeLeft,
-    name: 'fname',
+scoreBoard.forEach(element => console.log(element));
+
+
+
+function appendToStorage(oldScoreBoard, newScore){
     
-    };
+    var oldScoreBoard = localStorage.getItem("scoreBoard");
+    if(oldScoreBoard === null) oldScoreBoard = "";
+    localStorage.setItem("scoreBoard", oldScoreBoard + newScore);
+}
 
-    
-
-
-
-
-// highBtn.addEventListener('click', displayBoard)
+appendToStorage( "oldScores", collectName.value );
 
 
-
-
-// function displayBoard () {
-
-//     highBtn.style.display = 'none'
-//     highScores = localStorage.fname 
-
-// }

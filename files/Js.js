@@ -243,8 +243,17 @@ function endQuiz(event) {
     beginBtn.style.display = "block";
     // ulScores.style.display = "block"
 
-    //   Append that LI to the UL. Give the text content will contain scoreBoard name & Score. 
+    
     var ulScores = document.querySelector("#ulScores");
+
+    submitBtn.addEventListener('click', appendLi)
+    appendLi()
+ 
+    }
+
+     //   Append that LI to the UL. Give the text content will contain scoreBoard name & Score.
+
+function appendLi() {
 
     for (var i = 0; i < scoreBoard.length; i++) {
         var scoreBoards = scoreBoard[i];
@@ -256,9 +265,8 @@ function endQuiz(event) {
 
         li.appendChild(submitBtn);
         ulScores.appendChild(li);
-    }
 
-
+}
 
 }
 

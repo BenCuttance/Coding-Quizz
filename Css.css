@@ -134,7 +134,7 @@ button:hover {
 position: absolute;
 top: 360px;
 right: 854px;
-
+display: none;
 
 padding: 15px;
 font-size: 30px;
@@ -178,3 +178,12 @@ display: none;
 
 }
  
+li {
+
+position: fixed;
+left: 614px;
+background-color: white;
+border: 2px solid black;
+
+
+}

@@ -59,6 +59,7 @@ var quizQuestions = [{
 }];
 
 
+
 // Function to stop timer, which will be called once the user reaches the end of the quiz
 
 function stopTimer() {
@@ -96,7 +97,7 @@ function countdown() {
 }
 
 // changes display of multiples buttons to be hidden from user once the quiz starts. Also makes the questionContainer appear which will hold the quiz for the user to 
-// interact with
+// interact with.
 
 
 
@@ -115,7 +116,7 @@ function changeDisplay() {
 
 }
 
-// 
+// Checks if user selects answer from array.choices.correct. If so alert = Correct else alert = Incorrect & -15 seconds from counter/score
 
 function checkAnswer(event) {
     var correctAnswer = quizQuestions[currentIndex].choices.correct;
@@ -142,6 +143,8 @@ function checkAnswer(event) {
 
 }
 
+
+
 function displayQuestion() {
 
     questionSelector.textContent = quizQuestions[currentIndex].questionString;
@@ -154,6 +157,8 @@ function displayQuestion() {
 
 }
 
+// Starts quiz. Changes timeLeft & quizBtns display so quiz is replayable. Calls countdown and ChangeDisplay functions
+
 function beginQuiz() {
 
     timeLeft = 60
@@ -162,7 +167,7 @@ function beginQuiz() {
     quizBtn2.style.display = "block";
     quizBtn3.style.display = "block";
     quizBtn4.style.display = "block";
-    
+
 
     timerEl.style.display = "block"
 
@@ -189,13 +194,13 @@ function beginQuiz() {
 
 clearInterval(timeInterval);
 
-
+// Scoreform is called once counter is 0 or user completes quiz. Displays score and changes btns to display = none
 
 function scoreForm() {
 
     stopTimer()
 
-    
+
 
     timerEl.textContent = "Seconds remaining:" + timeLeft;
     questionSelector.textContent = "Game Over: Score: " + timeLeft;
@@ -209,12 +214,18 @@ function scoreForm() {
 
     submitBtn.style.display = 'block'
 
-    submitBtn.addEventListener('click', endQuiz)
+    
 }
 
 
+submitBtn.addEventListener('click', endQuiz)
+
+
+// endQuiz pushes user name and score to an array to be stored in localStorage. This is supposed to be used as the ScoreBoard for user to see their previous scores
+// Currenntly not working as intended. Creates a li element under the ul to show user score and name. Also not working as intended. Only appends once? 
+
 var scoreBoard = [];
-function endQuiz() {
+function endQuiz(event) {
 
 
     scoreBoard.push({ Name: collectName.value, score: timeLeft });
@@ -226,6 +237,7 @@ function endQuiz() {
 
     appendToStorage("oldScores", JSON.stringify(scoreBoard));
 
+    event.preventDefault();
     questionContainer.style.display = "none";
     submitBtn.style.display = "none"
     beginBtn.style.display = "block";
@@ -239,8 +251,8 @@ function endQuiz() {
 
 
         var li = document.createElement("li");
-        li.textContent = scoreBoard;
-        li.setAttribute("data-Index", i);
+        li.textContent = "User: " + scoreBoard[i].Name + ". Score: " + scoreBoard[i].score;
+        // li.setAttribute("data-Index", i);
 
         li.appendChild(submitBtn);
         ulScores.appendChild(li);
@@ -249,8 +261,6 @@ function endQuiz() {
 
 
 }
-
-// array1.forEach(element => console.log(element));
 
 
 
@@ -261,10 +271,22 @@ scoreBoard.forEach(element => console.log(element));
 function appendToStorage(oldScoreBoard, newScore) {
 
     var oldScoreBoard = localStorage.getItem("scoreBoard");
-    if (oldScoreBoard === null) oldScoreBoard = "";
+    if (oldScoreBoard === null) oldScoreBoard = [];
     localStorage.setItem("scoreBoard", oldScoreBoard + newScore);
 }
 
 appendToStorage("oldScores", collectName.value);
 
+// Not working as intended 
 
+function init() {
+    // Get stored todos from localStorage
+    var storedScores = JSON.parse(localStorage.getItem("scoreBoards"));
+
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (storedScores !== null) {
+        scoreBoard = storedScores;
+    }
+
+    end();
+}

@@ -27,3 +27,8 @@ This project takes advantage of many skills as a developer such as; HTML structu
 
 ![gameOver](https://user-images.githubusercontent.com/123234427/230893899-3079aa85-3956-43de-81de-e897391fcd9f.PNG)
 
+## Link to Page
+
+https://bencuttance.github.io/Coding-Quizz/
+
+
